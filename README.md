@@ -1,16 +1,7 @@
-# courseverse
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-----------------------------------
+Name and School: Malay Patel - Fountainhead School
+Date: 9th December, 2024
+Category: Education
+Project Name: CourseVerse
+Description:  Create your own AI generated course to learn any topic of your choice. You can even set your course to public, to make it available for the other users. Made it for ImpactX Hackathon
+-----------------------------------

@@ -14,6 +14,7 @@ void main() async {
           messagingSenderId: "402746916869",
           projectId: "courseverse-app"));
   initializeSize(428, 882);
+  configureEasyLoading();
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Container(
       decoration: BoxDecoration(

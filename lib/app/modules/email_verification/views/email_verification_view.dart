@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-
+import '../../../helper/all_imports.dart';
 import '../controllers/email_verification_controller.dart';
 
 class EmailVerificationView extends GetView<EmailVerificationController> {
@@ -13,6 +10,7 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
         builder: (context) {
           return SafeArea(
             child: Scaffold(
+              backgroundColor: AppColors.othersWhite,
               body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

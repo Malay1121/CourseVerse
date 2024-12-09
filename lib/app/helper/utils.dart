@@ -95,7 +95,7 @@ void logout() {
 void writeUserDetails(Map<String, dynamic> data) {
   // print(data);
   getStorage.write("userDetails", data);
-  // print(readUserDetails());
+  print(readUserDetails());
 }
 
 Map<String, dynamic>? readUserDetails() {
@@ -235,45 +235,41 @@ Future<String> getImage(String query) async {
   return "";
 }
 
-// Future<Map<String, dynamic>> fetchDetailsAuto(
-//     String text, List parameters) async {
-//   String bodyEncoded = json.encode({
-//     "system_instruction": {
-//       "parts": [
-//         {
-//           "text": AppStrings.autoFillPrompt,
-//         }
-//       ]
-//     },
-//     "contents": [
-//       {
-//         "parts": [
-//           {
-//             "text": jsonEncode({
-//               "text": text,
-//               "parameters": parameters,
-//             }),
-//           }
-//         ]
-//       }
-//     ],
-//     "generationConfig": {"response_mime_type": "application/json"}
-//   });
-//   // print(bodyEncoded);
-//   var headers = {'Content-Type': 'application/json'};
-//   var request = await http.post(
-//     Uri.parse(
-//         'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKeys["gemini"]}'),
-//     headers: headers,
-//     body: bodyEncoded,
-//   );
-//
-//   if (request.statusCode == 200) {
-//     String response = request.body;
-//     print(response);
-//     return json.decode(response);
-//   } else {
-//     // print(request.statusCode);
-//     return {};
-//   }
-// }
+Future<Map<String, dynamic>> createCourseApi(Map body) async {
+  String bodyEncoded = json.encode({
+    "system_instruction": {
+      "parts": [
+        {
+          "text": AppStrings.courseGenerationPrompt,
+        }
+      ]
+    },
+    "contents": [
+      {
+        "parts": [
+          {
+            "text": json.encode(body),
+          }
+        ]
+      }
+    ],
+    "generationConfig": {"response_mime_type": "application/json"}
+  });
+  // print(bodyEncoded);
+  var headers = {'Content-Type': 'application/json'};
+  var request = await http.post(
+    Uri.parse(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKeys["gemini"]}'),
+    headers: headers,
+    body: bodyEncoded,
+  );
+
+  if (request.statusCode == 200) {
+    String response = request.body;
+    return json.decode(
+        json.decode(response)["candidates"][0]["content"]["parts"][0]["text"]);
+  } else {
+    // print(request.statusCode);
+    return {};
+  }
+}

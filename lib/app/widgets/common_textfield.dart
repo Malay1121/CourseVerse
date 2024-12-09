@@ -15,8 +15,10 @@ class CommonTextField extends StatefulWidget {
     this.obscureText = false,
     this.textInputAction,
     this.maxLines = 1,
+    this.minLines = 1,
     this.prefixIconConstraints,
     this.onChanged,
+    this.inputFormatters,
   });
   String hintText;
   double? width;
@@ -27,9 +29,11 @@ class CommonTextField extends StatefulWidget {
   TextInputType? keyboardType;
   TextInputAction? textInputAction;
   int? maxLines;
+  int? minLines;
   BoxConstraints? prefixIconConstraints;
   Function(String)? onChanged;
   bool listening = false;
+  List<TextInputFormatter>? inputFormatters;
 
   @override
   State<CommonTextField> createState() => _CommonTextFieldState();
@@ -78,6 +82,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
       width: widget.width?.w(context),
       height: widget.height?.h(context),
       child: TextField(
+        minLines: widget.minLines,
         controller: widget.controller,
         obscureText: widget.obscureText,
         keyboardType: widget.keyboardType,
@@ -86,6 +91,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         style: Styles.semiBold(
             fontSize: FontSize.medium, color: AppColors.othersBlack),
         textInputAction: widget.textInputAction,
+        inputFormatters: widget.inputFormatters,
         decoration: InputDecoration(
           // contentPadding: EdgeInsets.zero,
           fillColor: AppColors.greyscale50,

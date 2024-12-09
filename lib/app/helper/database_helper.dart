@@ -74,4 +74,32 @@ class DatabaseHelper {
       showFirebaseError(error.message);
     }
   }
+
+  static Future createCourse(
+      {required User user, required Map<String, dynamic> data}) async {
+    try {
+      var course =
+          await FirebaseFirestore.instance.collection("courses").add(data);
+      data.addEntries({"courseId": course.id}.entries);
+      await FirebaseFirestore.instance
+          .collection("courses")
+          .doc(course.id)
+          .update(data);
+      return data;
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+  }
+
+  static Future getCourse({required String courseId}) async {
+    try {
+      DocumentSnapshot courseSnapshot = await FirebaseFirestore.instance
+          .collection("courses")
+          .doc(courseId)
+          .get();
+      return courseSnapshot.data();
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+  }
 }

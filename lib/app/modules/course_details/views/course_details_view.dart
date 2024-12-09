@@ -1,7 +1,4 @@
 import 'package:courseverse/app/helper/all_imports.dart';
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 
 import '../controllers/course_details_controller.dart';
 
@@ -13,6 +10,7 @@ class CourseDetailsView extends GetView<CourseDetailsController> {
       init: CourseDetailsController(),
       builder: (controller) {
         return Scaffold(
+          backgroundColor: AppColors.othersWhite,
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -22,7 +20,7 @@ class CourseDetailsView extends GetView<CourseDetailsController> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(
-                        "https://image.pollinations.ai/prompt/Introduction-to-Optimization-and-Finding-Critical-Points",
+                        "https://image.pollinations.ai/prompt/${controller.courseDetails != null ? controller.courseDetails!["title"].toString().replaceAll(" ", "-") : "Courses"}",
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -61,13 +59,13 @@ class CourseDetailsView extends GetView<CourseDetailsController> {
                     horizontal: 24.w(context),
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
                         height: 24.h(context),
                       ),
                       AppText(
-                        text:
-                            "Introduction to Optimization and Finding Critical Points",
+                        text: (controller.courseDetails?["title"]).toString(),
                         maxFontSize: FontSize.h3,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -92,7 +90,8 @@ class CourseDetailsView extends GetView<CourseDetailsController> {
                                 horizontal: 10.w(context),
                               ),
                               child: AppText(
-                                text: "Mathematics",
+                                text: (controller.courseDetails?["category"])
+                                    .toString(),
                                 centered: true,
                                 style: Styles.semiBold(
                                   color: AppColors.primary500,
@@ -113,7 +112,8 @@ class CourseDetailsView extends GetView<CourseDetailsController> {
                             width: 6.w(context),
                           ),
                           AppText(
-                            text: "6 hours",
+                            text: (controller.courseDetails?["length"])
+                                .toString(),
                             height: 22.h(context),
                             style: Styles.medium(
                               color: AppColors.greyscale800,
@@ -154,55 +154,180 @@ class CourseDetailsView extends GetView<CourseDetailsController> {
                       ),
                       Row(
                         children: [
-                          Column(
-                            children: [
-                              AppText(
-                                text: "About",
-                                style: Styles.semiBold(
-                                  color: AppColors.primary500,
-                                  fontSize: FontSize.xLarge,
-                                ),
+                          for (String tab in controller.tabs)
+                            GestureDetector(
+                              onTap: () => controller.changeTab(tab),
+                              child: Column(
+                                children: [
+                                  AppText(
+                                    text: tab,
+                                    style: Styles.semiBold(
+                                      color: controller.tabs.indexOf(tab) ==
+                                              controller.selectedTab
+                                          ? AppColors.primary500
+                                          : AppColors.greyscale500,
+                                      fontSize: FontSize.xLarge,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 12.h(context),
+                                  ),
+                                  Container(
+                                    width: 190.w(context),
+                                    height: controller.tabs.indexOf(tab) ==
+                                            controller.selectedTab
+                                        ? 4
+                                        : 2,
+                                    decoration: BoxDecoration(
+                                      color: controller.tabs.indexOf(tab) ==
+                                              controller.selectedTab
+                                          ? AppColors.primary500
+                                          : AppColors.greyscale200,
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: 12.h(context),
-                              ),
-                              Container(
-                                width: 190.w(context),
-                                height: 4,
-                                decoration: BoxDecoration(
-                                  color: AppColors.primary500,
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              AppText(
-                                text: "Chapters",
-                                style: Styles.semiBold(
-                                  color: AppColors.greyscale500,
-                                  fontSize: FontSize.xLarge,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 12.h(context),
-                              ),
-                              Container(
-                                width: 190.w(context),
-                                height: 2,
-                                decoration: BoxDecoration(
-                                  color: AppColors.greyscale200,
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
                         ],
                       ),
                       SizedBox(
                         height: 24.h(context),
                       ),
+                      if (controller.selectedTab == 0)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppText(
+                              text: "About Course",
+                              style: Styles.bold(
+                                color: AppColors.greyscale900,
+                                fontSize: FontSize.h5,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 12.h(context),
+                            ),
+                            AppText(
+                              text: (controller.courseDetails?["description"])
+                                  .toString(),
+                              maxLines: null,
+                              style: Styles.regular(
+                                color: AppColors.greyscale800,
+                                fontSize: FontSize.medium,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 24.h(context),
+                            ),
+                            CommonButton(
+                              text: "Enroll Course",
+                              onTap: () {},
+                            ),
+                          ],
+                        ),
+                      if (controller.selectedTab == 1)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppText(
+                              text:
+                                  "${controller.courseDetails?["chapters"]} Chapters",
+                              style: Styles.bold(
+                                color: AppColors.greyscale900,
+                                fontSize: FontSize.h5,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 24.h(context),
+                            ),
+                            for (Map chapter in controller
+                                    .courseDetails?["chapters_details"] ??
+                                [])
+                              Container(
+                                width: 380.w(context),
+                                height: 80.h(context),
+                                margin: EdgeInsets.only(
+                                  bottom: 24.h(context),
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: AppColors.othersWhite,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: Offset(0, 4),
+                                      blurRadius: 60,
+                                      color:
+                                          Color(0xFF04060F).withOpacity(0.05),
+                                      spreadRadius: 0,
+                                    ),
+                                  ],
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 16.w(context),
+                                  vertical: 16.h(context),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 44.w(context),
+                                      height: 44.h(context),
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color(0xFF335EF7).withOpacity(0.08),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: AppText(
+                                        text: chapter["chapter"].toString(),
+                                        centered: true,
+                                        style: Styles.bold(
+                                          color: AppColors.primary500,
+                                          fontSize: FontSize.h6,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 16.w(context),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        AppText(
+                                          text: chapter["title"],
+                                          width: 240.w(context),
+                                          minFontSize: FontSize.h6,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: Styles.bold(
+                                            color: AppColors.greyscale900,
+                                            fontSize: FontSize.h6,
+                                          ),
+                                        ),
+                                        AppText(
+                                          text: chapter["time"],
+                                          width: 240.w(context),
+                                          maxFontSize: FontSize.medium,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: Styles.medium(
+                                            color: AppColors.greyscale700,
+                                            fontSize: FontSize.medium,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Icon(
+                                      Icons.keyboard_arrow_right_rounded,
+                                      size: 28.t(context),
+                                      color: AppColors.greyscale500,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            SizedBox(
+                              height: 24.h(context),
+                            ),
+                          ],
+                        ),
                     ],
                   ),
                 ),
