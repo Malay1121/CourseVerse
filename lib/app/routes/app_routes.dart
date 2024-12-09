@@ -9,6 +9,7 @@ abstract class Routes {
   static const COURSE_DETAILS = _Paths.COURSE_DETAILS;
   static const CREATE_COURSE = _Paths.CREATE_COURSE;
   static const SPLASH = _Paths.SPLASH;
+  static const COURSE = _Paths.COURSE;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const COURSE_DETAILS = '/course-details';
   static const CREATE_COURSE = '/create-course';
   static const SPLASH = '/splash';
+  static const COURSE = '/course';
 }

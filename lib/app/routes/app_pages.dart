@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/course/bindings/course_binding.dart';
+import '../modules/course/views/course_view.dart';
 import '../modules/course_details/bindings/course_details_binding.dart';
 import '../modules/course_details/views/course_details_view.dart';
 import '../modules/create_course/bindings/create_course_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.COURSE,
+      page: () => const CourseView(),
+      binding: CourseBinding(),
     ),
   ];
 }

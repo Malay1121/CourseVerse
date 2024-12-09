@@ -113,32 +113,33 @@ class CourseDetailsView extends GetView<CourseDetailsController> {
                           ),
                           AppText(
                             text: (controller.courseDetails?["length"])
-                                .toString(),
+                                    .toString() +
+                                " Hours",
                             height: 22.h(context),
                             style: Styles.medium(
                               color: AppColors.greyscale800,
                               fontSize: FontSize.large,
                             ),
                           ),
-                          SizedBox(
-                            width: 16.w(context),
-                          ),
-                          Icon(
-                            Icons.people,
-                            size: 20.t(context),
-                            color: AppColors.primary500,
-                          ),
-                          SizedBox(
-                            width: 6.w(context),
-                          ),
-                          AppText(
-                            text: "1 Students",
-                            height: 22.h(context),
-                            style: Styles.medium(
-                              color: AppColors.greyscale800,
-                              fontSize: FontSize.large,
-                            ),
-                          ),
+                          // SizedBox(
+                          //   width: 16.w(context),
+                          // ),
+                          // Icon(
+                          //   Icons.people,
+                          //   size: 20.t(context),
+                          //   color: AppColors.primary500,
+                          // ),
+                          // SizedBox(
+                          //   width: 6.w(context),
+                          // ),
+                          // AppText(
+                          //   text: "1 Students",
+                          //   height: 22.h(context),
+                          //   style: Styles.medium(
+                          //     color: AppColors.greyscale800,
+                          //     fontSize: FontSize.large,
+                          //   ),
+                          // ),
                         ],
                       ),
                       SizedBox(
@@ -220,10 +221,6 @@ class CourseDetailsView extends GetView<CourseDetailsController> {
                             SizedBox(
                               height: 24.h(context),
                             ),
-                            CommonButton(
-                              text: "Enroll Course",
-                              onTap: () {},
-                            ),
                           ],
                         ),
                       if (controller.selectedTab == 1)
@@ -244,83 +241,96 @@ class CourseDetailsView extends GetView<CourseDetailsController> {
                             for (Map chapter in controller
                                     .courseDetails?["chapters_details"] ??
                                 [])
-                              Container(
-                                width: 380.w(context),
-                                height: 80.h(context),
-                                margin: EdgeInsets.only(
-                                  bottom: 24.h(context),
+                              GestureDetector(
+                                onTap: () => Get.toNamed(
+                                  Routes.COURSE,
+                                  arguments: {
+                                    "courseDetails": controller.courseDetails,
+                                    "currentChapter":
+                                        (controller.courseDetails?[
+                                                    "chapters_details"] ??
+                                                [])
+                                            .indexOf(chapter),
+                                  },
                                 ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  color: AppColors.othersWhite,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(0, 4),
-                                      blurRadius: 60,
-                                      color:
-                                          Color(0xFF04060F).withOpacity(0.05),
-                                      spreadRadius: 0,
-                                    ),
-                                  ],
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 16.w(context),
-                                  vertical: 16.h(context),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 44.w(context),
-                                      height: 44.h(context),
-                                      decoration: BoxDecoration(
+                                child: Container(
+                                  width: 380.w(context),
+                                  height: 80.h(context),
+                                  margin: EdgeInsets.only(
+                                    bottom: 24.h(context),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    color: AppColors.othersWhite,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        offset: Offset(0, 4),
+                                        blurRadius: 60,
                                         color:
-                                            Color(0xFF335EF7).withOpacity(0.08),
-                                        shape: BoxShape.circle,
+                                            Color(0xFF04060F).withOpacity(0.05),
+                                        spreadRadius: 0,
                                       ),
-                                      child: AppText(
-                                        text: chapter["chapter"].toString(),
-                                        centered: true,
-                                        style: Styles.bold(
-                                          color: AppColors.primary500,
-                                          fontSize: FontSize.h6,
+                                    ],
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 16.w(context),
+                                    vertical: 16.h(context),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 44.w(context),
+                                        height: 44.h(context),
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF335EF7)
+                                              .withOpacity(0.08),
+                                          shape: BoxShape.circle,
                                         ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 16.w(context),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        AppText(
-                                          text: chapter["title"],
-                                          width: 240.w(context),
-                                          minFontSize: FontSize.h6,
-                                          overflow: TextOverflow.ellipsis,
+                                        child: AppText(
+                                          text: chapter["chapter"].toString(),
+                                          centered: true,
                                           style: Styles.bold(
-                                            color: AppColors.greyscale900,
+                                            color: AppColors.primary500,
                                             fontSize: FontSize.h6,
                                           ),
                                         ),
-                                        AppText(
-                                          text: chapter["time"],
-                                          width: 240.w(context),
-                                          maxFontSize: FontSize.medium,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: Styles.medium(
-                                            color: AppColors.greyscale700,
-                                            fontSize: FontSize.medium,
+                                      ),
+                                      SizedBox(
+                                        width: 16.w(context),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          AppText(
+                                            text: chapter["title"],
+                                            width: 240.w(context),
+                                            minFontSize: FontSize.h6,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: Styles.bold(
+                                              color: AppColors.greyscale900,
+                                              fontSize: FontSize.h6,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Icon(
-                                      Icons.keyboard_arrow_right_rounded,
-                                      size: 28.t(context),
-                                      color: AppColors.greyscale500,
-                                    ),
-                                  ],
+                                          AppText(
+                                            text: chapter["time"],
+                                            width: 240.w(context),
+                                            maxFontSize: FontSize.medium,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: Styles.medium(
+                                              color: AppColors.greyscale700,
+                                              fontSize: FontSize.medium,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.keyboard_arrow_right_rounded,
+                                        size: 28.t(context),
+                                        color: AppColors.greyscale500,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             SizedBox(
