@@ -51,6 +51,7 @@ dependencies:
   firebase_auth: ^5.3.4
   cloud_firestore: ^5.5.1
   firebase_core: ^3.8.1
+  font_awesome_flutter: ^10.8.0
 
 dev_dependencies:
   flutter_test:
@@ -82,15 +83,15 @@ flutter:
   fonts:
     - family: Urbanist
       fonts:
-        - asset: assets/fonts/Urbanist-Regular.otf
+        - asset: assets/fonts/Urbanist-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Urbanist-Light.otf
+        - asset: assets/fonts/Urbanist-Light.ttf
           weight: 300
-        - asset: assets/fonts/Urbanist-Medium.otf
+        - asset: assets/fonts/Urbanist-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Urbanist-SemiBold.otf
+        - asset: assets/fonts/Urbanist-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/Urbanist-Bold.otf
+        - asset: assets/fonts/Urbanist-Bold.ttf
           weight: 700
   #
   # For details regarding fonts from package dependencies,

@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:courseverse/app/helper/all_imports.dart';
-import 'package:courseverse/app/helper/app_colors.dart';
 
 class CommonButton extends StatefulWidget {
   CommonButton(
@@ -11,14 +8,14 @@ class CommonButton extends StatefulWidget {
       this.height,
       this.width,
       this.backgroundColor,
-      this.textStyle,
+      this.textColor,
       this.border});
   String text;
   VoidCallback onTap;
   double? height;
   double? width;
   Color? backgroundColor;
-  TextStyle? textStyle;
+  Color? textColor;
   Border? border;
   @override
   State<CommonButton> createState() => _CommonButtonState();
@@ -30,19 +27,22 @@ class _CommonButtonState extends State<CommonButton> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        height: widget.height ?? 28.h(context),
-        width: widget.width ?? 196.w(context),
+        height: widget.height ?? 58.h(context),
+        width: widget.width ?? 380.w(context),
         decoration: BoxDecoration(
           color: widget.backgroundColor ?? AppColors.primary500,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(100),
           border: widget.border,
         ),
         child: Center(
           child: AppText(
             text: widget.text,
-            height: 12.44.h(context),
+            height: 22.h(context),
             centered: true,
-            style: widget.textStyle ?? Styles.bodyLargeBold,
+            style: Styles.bold(
+              color: widget.textColor ?? AppColors.othersWhite,
+              fontSize: FontSize.large,
+            ),
           ),
         ),
       ),

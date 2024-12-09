@@ -17,6 +17,7 @@ export 'package:get_storage/get_storage.dart';
 export 'package:crypto/crypto.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:flutter_tts/flutter_tts.dart';
+export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 export 'app_strings.dart';
 export 'utils.dart';
@@ -25,6 +26,7 @@ export 'package:courseverse/app/routes/app_pages.dart';
 export 'constants.dart';
 export 'app_images.dart';
 export 'app_colors.dart';
+export 'text_styles.dart';
 
 export 'package:courseverse/app/widgets/common_button.dart';
 export 'package:courseverse/app/widgets/common_controller.dart';

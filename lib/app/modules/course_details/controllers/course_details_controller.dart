@@ -1,9 +1,9 @@
-import 'package:courseverse/app/helper/all_imports.dart';
 import 'package:get/get.dart';
 
-class HomeController extends CommonController {
-  TextEditingController searchController = TextEditingController();
+class CourseDetailsController extends GetxController {
+  //TODO: Implement CourseDetailsController
 
+  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -18,4 +18,6 @@ class HomeController extends CommonController {
   void onClose() {
     super.onClose();
   }
+
+  void increment() => count.value++;
 }

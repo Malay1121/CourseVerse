@@ -104,7 +104,7 @@ Map<String, dynamic>? readUserDetails() {
 
 showSnackbar({String? title, String? message}) {
   Get.snackbar(
-    title ?? 'LocalHarvest',
+    title ?? 'CourseVerse',
     message ?? '',
     backgroundColor: AppColors.primary500,
     colorText: AppColors.othersWhite,

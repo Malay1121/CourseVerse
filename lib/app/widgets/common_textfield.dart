@@ -7,8 +7,8 @@ class CommonTextField extends StatefulWidget {
   CommonTextField({
     super.key,
     required this.hintText,
-    this.height = 28,
-    this.width = 196,
+    this.height = 60,
+    this.width = 380,
     this.prefixIcon,
     this.controller,
     this.keyboardType,
@@ -83,11 +83,12 @@ class _CommonTextFieldState extends State<CommonTextField> {
         keyboardType: widget.keyboardType,
         maxLines: widget.maxLines,
         onChanged: widget.onChanged,
-        style: Styles.bodyMediumSemibold,
+        style: Styles.semiBold(
+            fontSize: FontSize.medium, color: AppColors.othersBlack),
         textInputAction: widget.textInputAction,
         decoration: InputDecoration(
           // contentPadding: EdgeInsets.zero,
-          fillColor: AppColors.othersWhite,
+          fillColor: AppColors.greyscale50,
           filled: true,
           hintText: widget.hintText,
           suffixIcon: GestureDetector(
@@ -95,26 +96,27 @@ class _CommonTextFieldState extends State<CommonTextField> {
             child: Icon(
               widget.listening ? Icons.stop : Icons.mic,
               color: AppColors.primary500,
-              size: 12.t(context),
+              size: 18.t(context),
             ),
           ),
-          hintStyle: Styles.bodyMediumRegular,
+          hintStyle: Styles.regular(
+              fontSize: FontSize.medium, color: AppColors.greyscale500),
           prefixIconConstraints: widget.prefixIconConstraints,
           prefixIcon: widget.prefixIcon,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
           disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
         ),

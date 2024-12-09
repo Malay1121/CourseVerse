@@ -49,7 +49,9 @@ class _CommonBottomBarState extends State<CommonBottomBar> {
                           text: tab["title"],
                           height: 12.h(context),
                           centered: true,
-                          style: Styles.bodyXsmallMedium,
+                          style: Styles.medium(
+                              fontSize: FontSize.xSmall,
+                              color: AppColors.greyscale500),
                         ),
                     ],
                   ),
